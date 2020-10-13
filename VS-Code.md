@@ -3,6 +3,7 @@ FEATURES Of VS-Code
 2. Syntax Highlighting
 3. Intelligent Code Completion
 4. Snippets
+5. Robust and Extensible Architecture
 
 USEFUL PLUGINS OF VS-CODE
 1. Visual Studio Intellicode
@@ -12,3 +13,4 @@ USEFUL PLUGINS OF VS-CODE
 5. Sass
 6. Path Intellisense
 7. Debugger for Chrome
+8. Minify
