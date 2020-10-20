@@ -23,4 +23,4 @@ else {
 isArmstrongNumber(1634)
 isArmstrongNumber(153)
 isArmstrongNumber(92727)
-isArmstrongNumber(121)
+

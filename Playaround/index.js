@@ -1,8 +1,7 @@
 // let is block-scoped and variables declared 
 //within a block of code cannot be accessed outside of it.
 
-//let
-
+//let 
 function begin () {
     for (var i=0; i<5; i++) {
      console.log(i) 
