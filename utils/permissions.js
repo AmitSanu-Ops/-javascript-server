@@ -74,7 +74,14 @@ const permissions={
 // roles('head-trainer')
 function hasPermission(moduleName,role,pType)
 {
-    console.log(permissions[moduleName][pType].includes(role))
+    if(permissions[moduleName].all.includes(role))
+    {
+    return true;
+    }
+    else
+    {
+        return permissions[moduleName][pType].includes(role);
+    }
 }
-hasPermission('getUsers','trainer','read')
-hasPermission('getUsers2','trainee','write')
+console.log(hasPermission('getUsers','trainer','read'));
+//hasPermission('getUsers2','trainee','write')
