@@ -83,5 +83,5 @@ function hasPermission(moduleName,role,pType)
         return permissions[moduleName][pType].includes(role);
     }
 }
-console.log(hasPermission('getUsers','trainer','read'));
-//hasPermission('getUsers2','trainee','write')
+console.log(hasPermission('getUsers','head-trainer','read'));
+console.log(hasPermission('getUsers2','trainee','write'));
