@@ -1,0 +1,29 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/node": "^7.12.1",
+    "@babel/preset-env": "^7.12.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "extra":"babel-node extra"
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmitSanu-Ops/-javascript-server.git"
+  },
+  "keywords": [
+    "npm1"
+  ],
+  "author": "amit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmitSanu-Ops/-javascript-server/issues"
+  },
+  "homepage": "https://github.com/AmitSanu-Ops/-javascript-server#readme"
+}

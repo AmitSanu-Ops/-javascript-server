@@ -2,26 +2,23 @@
 //     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 //     return re.test(email);
 // }
-let users = [
-    {traineeEmail: 'TRAINER@successive.tech',reviewerEmail: 'reviewer1@successive.tech'
-},
-{traineeEmail: 'trae1@successive.tech',reviewerEmail: 'revierccessive.tech'
-},
-{traineeEmail: 'trainee1@successive.tech',reviewerEmail: 'reviewer1@successive.TECH'
-}
-];
+// let users = [
+//     {traineeEmail: 'TRAINER@successive.tech',reviewerEmail: 'reviewer1@successive.tech'
+// },
+// {traineeEmail: 'trae1@successive.tech',reviewerEmail: 'revierccessive.tech'
+// },
+// {traineeEmail: 'trainee1@successive.tech',reviewerEmail: 'reviewer1@successive.TECH'
+// }
+// ];
 //users.forEach(([traineeEmail,reviewerEmail]) => console.log(traineeEmail+' '+reviewerEmail))
-let emailcheck=/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;
+
 let ValidUser = "";
 let InValidUser = "";
 let count1 = 0, count2 = 0;
-function validateEmail(email)
+import validateEmail from './helper';
+export default function validateUsers(users)
 {
-    return emailcheck.test(email);
-}
-function validateUsers(user)
-{
-    for(i=0;i<users.length;i++)
+    for(let i=0;i<users.length;i++)
     {
       let  {traineeEmail , reviewerEmail} = users[i];
       if(validateEmail(traineeEmail) && validateEmail(reviewerEmail))
@@ -41,4 +38,4 @@ function validateUsers(user)
     console.log("Count of Invalid users : ",count2);
     console.log("Invalid users are : ",InValidUser);
 }
-validateUsers(users);
+//validateUsers(users);
