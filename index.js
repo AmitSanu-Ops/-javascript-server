@@ -1,10 +1,10 @@
-// let is block-scoped and variables declared
+// let is block-scoped and variables declared 
 //within a block of code cannot be accessed outside of it.
 
-//let
+//let var
 function begin () {
     for (var i=0; i<5; i++) {
-     console.log(i)
+     console.log(i) 
     }
    // i is accessible outside the for loop
     console.log.begin(i)
@@ -14,7 +14,7 @@ function begin () {
 // var
 function begin () {
     for (var j=0; j<5; j++) {
-     console.log(j)
+     console.log(j) 
     }
    // i is accessible outside the for loop
     console.log(j)

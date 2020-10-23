@@ -14,11 +14,7 @@ The snippet syntax follows the TextMate snippet syntax with the exceptions of 'i
 Visual Studio Code includes a public extensibility model that lets developers build and use extensions, and richly customize their edit-build-debug experience.
 
 USEFUL PLUGINS OF VS-CODE
-<<<<<<< HEAD
-1. Visual Studio Intellicode - 
-=======
 1. Visual Studio Intellicode
->>>>>>> d9cf9630cc4e557d11b293a06605c766448c4610
 2. Git Blame
 3. Prettier
 4. JavaScript (ES6) Code Snippets
