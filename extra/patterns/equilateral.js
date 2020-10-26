@@ -16,10 +16,10 @@ export default function triangle(n){
                 star=star+" ";
                 k=1;
             }
-           
+
         }
         console.log(star);
-       
+
     }
 }
 //triangle(6);
