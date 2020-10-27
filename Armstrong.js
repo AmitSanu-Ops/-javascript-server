@@ -5,10 +5,10 @@ function isArmstrongNumber(n) {
     let sum = 0;
     //let n=1634;
     let temp = n;
-    let d = n.toString().length;
+    let d = n.toString().length; 
     //console.log(d);
     while (temp > 0) {
-
+        
         let r = temp % 10;
         sum += Math.pow(r,d);
         temp = parseInt(temp / 10);
@@ -23,5 +23,5 @@ function isArmstrongNumber(n) {
     isArmstrongNumber(1634)
     isArmstrongNumber(153)
     isArmstrongNumber(92727)
-
-
+    
+    
