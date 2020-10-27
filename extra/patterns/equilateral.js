@@ -1,5 +1,5 @@
 //let n=process.argv[2];
-function triangle(n){
+export default function triangle(n){
     //let n=10;
     for(let i=1;i<=n;i++)
     {
@@ -16,10 +16,10 @@ function triangle(n){
                 star=star+" ";
                 k=1;
             }
-           
+
         }
         console.log(star);
-       
+
     }
 }
-triangle(5);
+//triangle(6);

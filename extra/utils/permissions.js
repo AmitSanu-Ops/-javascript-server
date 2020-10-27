@@ -20,28 +20,28 @@
 //         console.log(this.write)
 //         console.log(this.delete)
 
-const permissions={
+// const permissions={
 
-    'getUsers': {
-    all: ['head-trainer'],
-    read  :['trainee', 'trainer'],
-      write : ['trainer'],
-      delete: []
-    },
-    'getUsers1': {
-         all: ['head-trainer'],
-        read  :['trainee', 'trainer'],
-          write : ['trainer'],
-          delete: []
-        },
-        'getUsers2': {
-            all: ['head-trainer'],
-           read  :['trainee', 'trainer'],
-             write : ['trainer'],
-             delete: []
-           }
+//     'getUsers': {
+//     all: ['head-trainer'],
+//     read  :['trainee', 'trainer'],
+//       write : ['trainer'],
+//       delete: []
+//     },
+//     'getUsers1': {
+//          all: ['head-trainer'],
+//         read  :['trainee', 'trainer'],
+//           write : ['trainer'],
+//           delete: []
+//         },
+//         'getUsers2': {
+//             all: ['head-trainer'],
+//            read  :['trainee', 'trainer'],
+//              write : ['trainer'],
+//              delete: []
+//            }
 
- };
+//  };
 // function hasPermission(moduleName,role,pType)
 // {
 //       console.log(role)
@@ -72,7 +72,9 @@ const permissions={
 // }
 // }
 // roles('head-trainer')
-function hasPermission(moduleName,role,pType)
+
+/*
+export default function hasPermission(moduleName,role,pType)
 {
     if(permissions[moduleName].all.includes(role))
     {
@@ -82,6 +84,29 @@ function hasPermission(moduleName,role,pType)
     {
         return permissions[moduleName][pType].includes(role);
     }
+}   */
+// console.log(hasPermission('getUsers','head-trainer','read'));
+// console.log(hasPermission('getUsers2','trainee','write'));
+
+export default function hasPermission(moduleName, role, permissionType) {
+  let type;
+  const { all, read, write, Delete } = moduleName;
+  if (permissionType == 'all')
+      type = all;
+  if (permissionType == 'read')
+      type = read;
+  if (permissionType == 'write')
+      type = write;
+  if (permissionType == 'Delete')
+      type = Delete;
+
+  if (role == 'head-trainer') {
+      return true;
+  }
+  else {
+      if (type.includes(role))
+          return true
+      else
+          return false;
+  }
 }
-console.log(hasPermission('getUsers','head-trainer','read'));
-console.log(hasPermission('getUsers2','trainee','write'));
