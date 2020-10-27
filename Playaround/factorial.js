@@ -1,7 +1,7 @@
 let n;
 function factorial(n)
  {
-    if (n < 0) 
+    if (n < 0)
     console.log('Error! Factorial for negative number does not exist.');
     else if((n == 0) || (n == 1))
       return 1;
@@ -10,4 +10,4 @@ function factorial(n)
   }
 console.log(factorial(-1))
 
-///
+/////
