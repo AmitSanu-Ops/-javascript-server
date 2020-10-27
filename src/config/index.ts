@@ -1,3 +1,3 @@
-console.log("Inside config file")
+console.log('Inside config file');
 
-export {default as config} from './configuration';
+export { default as config } from './configuration';

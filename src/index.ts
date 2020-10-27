@@ -1,10 +1,10 @@
-import Server from './Server';
 import config from './config/configuration';
-console.log("config is",config)
+import Server from './Server';
+console.log('config is', config );
 const server = new Server(
 {
-  port : 9000
+  port : 9000,
 
 });
 
-server.bootstrap().run()
+server.bootstrap().run();
