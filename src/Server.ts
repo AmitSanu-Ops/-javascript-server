@@ -1,4 +1,8 @@
 import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import {notFoundHandler, errorHandler,} from './libs/routes'
+
+console.log(bodyParser);
 class Server {
   app;
   constructor(private config) {
@@ -7,16 +11,31 @@ class Server {
     }
   bootstrap() {
     this.setupRoutes();
+    this.initBodyParser();
     return this;
   }
-  setupRoutes() {
+  public setupRoutes() {
     const {app} = this;
+    this.app.use('/',(req, res, next)=>{
+      console.log("Inside first middleware");
+      next()
+    })
 
     app.get('/health-check', (req, res, next) => {
+      console.log("Inside second middleware");
       res.send('I am Ok');
     });
-    return this;
+    //return this;
+    this.app.use(notFoundHandler);
+
+
+    this.app.use(errorHandler);
   }
+
+  public initBodyParser(){
+    this.app.use(bodyParser.json({ type: 'application/*+json' }));
+  }
+
   run() {
     const {app, config: {port}} = this;
 
