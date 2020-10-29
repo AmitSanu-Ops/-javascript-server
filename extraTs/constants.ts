@@ -14,7 +14,7 @@ export const permissions =
     }
 }
 
-export let users = [
+export const users = [
   {traineeEmail: 'TRAINER@successive.tech',reviewerEmail: 'reviewer1@successive.tech'
 },
 {traineeEmail: 'trae1@successive.tech',reviewerEmail: 'revierccessive.tech'
