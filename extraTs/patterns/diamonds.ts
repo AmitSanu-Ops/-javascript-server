@@ -1,5 +1,4 @@
 export default function diamond(n){
-  //let n=10;
   for(let i=1;i<=n;i++)
   {
       let star="";
@@ -15,10 +14,10 @@ export default function diamond(n){
               star=star+" ";
               k=1;
           }
-         
+
       }
       console.log(star);
-     
+
   }
   for(let i=n;i>=1;i--)
   {
@@ -35,10 +34,10 @@ export default function diamond(n){
               star=star+" ";
               k=1;
           }
-         
+
       }
       console.log(star);
-     
+
   }
 }
 //diamond(5);
