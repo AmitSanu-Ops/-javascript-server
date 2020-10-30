@@ -1,3 +1,4 @@
+import { Ipermissions, Iusers} from "./interfaces"
  const permissions: Ipermissions = {
     'getUsers': {
         all: ['head-trainer'],
@@ -13,7 +14,7 @@
     }
 };
 
-import { Ipermissions, Iusers} from "./interfaces"
+
 
 // let users:Iusers = [
 //   {traineeEmail: 'TRAINER@successive.tech',reviewerEmail: 'reviewer1@successive.tech'
