@@ -1,6 +1,7 @@
 //import {diamond,triangle} from './patterns';
 //import {hasPermission,validateUsers} from './utils';
 import {validateUsers} from "./utils/index"
+import {Iusers} from "./interfaces"
 //import {validateEmail} from "./utils/index"
  
 //diamond(5);
@@ -13,7 +14,7 @@ import {validateUsers} from "./utils/index"
 //  console.log(result);
 
 
-let users: Iusers[] = [
+const users: Iusers[] = [
     {traineeEmail: 'TRAINER@successive.tech',
     reviewerEmail: 'reviewer1@successive.tech'
   },
@@ -27,6 +28,6 @@ let users: Iusers[] = [
   ];
   
  validateUsers(users);
- import {Iusers} from "./interfaces"
+
 
  
