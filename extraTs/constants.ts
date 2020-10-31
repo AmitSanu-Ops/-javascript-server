@@ -1,5 +1,5 @@
-export const permissions =
-{
+import { Ipermissions, Iusers} from "./interfaces"
+ const permissions: Ipermissions = {
     'getUsers': {
         all: ['head-trainer'],
         read: ['trainee', 'trainer'],
@@ -12,14 +12,15 @@ export const permissions =
         write: ['trainee'],
         Delete: [],
     }
-}
+};
 
-export const users = [
-  {traineeEmail: 'TRAINER@successive.tech',reviewerEmail: 'reviewer1@successive.tech'
-},
-{traineeEmail: 'trae1@successive.tech',reviewerEmail: 'revierccessive.tech'
-},
-{traineeEmail: 'trainee1@successive.tech',reviewerEmail: 'reviewer1@successive.TECH'
-}
-];
- 
+
+
+// let users:Iusers = [
+//   {traineeEmail: 'TRAINER@successive.tech',reviewerEmail: 'reviewer1@successive.tech'
+// },
+// {traineeEmail: 'trae1@successive.tech',reviewerEmail: 'revierccessive.tech'
+// },
+// {traineeEmail: 'trainee1@successive.tech',reviewerEmail: 'reviewer1@successive.TECH'
+// }
+// ];
