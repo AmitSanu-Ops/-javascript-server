@@ -3,11 +3,11 @@
 import {validateUsers} from "./utils/index"
 import {Iusers} from "./interfaces"
 //import {validateEmail} from "./utils/index"
- 
+
 //diamond(5);
 //triangle(5);
 
-// import {permissions , users} from './constants';
+//import {permissions , users} from './constants';
 
 //  const { getUsers} = permissions;
 //  let result = hasPermission(getUsers, 'head-trainer', 'read');
@@ -26,8 +26,7 @@ const users: Iusers[] = [
       reviewerEmail: 'reviewer1@successive.TECH'
   }
   ];
-  
+
  validateUsers(users);
 
 
- 

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
  import { Ipermissions, Iusers} from "./interfaces"
+=======
+import { Ipermissions, Iusers} from "./interfaces"
+>>>>>>> 685ebccbf113f2d66eeb09b33c1dfbf0ed589912
  const permissions: Ipermissions = {
     'getUsers': {
         all: ['head-trainer'],
