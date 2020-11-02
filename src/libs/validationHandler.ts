@@ -1,51 +1,64 @@
+import { json } from 'express';
 import config1 from '../controllers/trainee/validation';
 
 
 let a=Object.keys(config1.get);
 export default function(config){
   return function (req, res, next){
-    console.log("Config",config);
-    console.log(req.query);
-    //console.log(req.body);
-   // console.log(Object.keys(config1.get));
-    //const obj = Object.fromEntries(keys);
-    //console.log(keys)
+    console.log(req.query, "output11");
+
+    let {skip, limit} = req && req.query;
+
 
     // let a = 2;
     //console.log(req[a]);
 
-            console.log(Object.keys(a[0].includes('number')));
+           // console.log(Object.keys(a[0].includes('number')));
 
             // if(a.includes('skip'))
             // {
             //     console.log("cfv ");
             // }
 
-            let b=typeof(JSON.parse(req.query.skip));
-            let b1=typeof(JSON.parse(req.query.limit));
-            // console.log(b);
-            for(let i=0;i<a.length;i++)
-            {
-                if(a[i]=='skip')
+            //const reqQuery = JSON.parse(req.query)
+           // console.log(reqQuery)
+            //const {skip, limit} = req.query
+          //  console.log('body is', req[obj.in]);
+          //   console.log('body', Object.keys( req[obj.in] ).length );
+
+
+             let b = parseInt(skip) || 0;
+             let b1 = parseInt(limit) || 0;
+
+             console.log(b,b1, '22222')
+             //let b1=typeof(req.query);
+
+             for(let i=0;i<a.length;i++)
+             {
+              console.log(a[i]);
+                 if(a[i]==='skip')
                 {
-                    if((b)=='number')
+                     if(b)
                     {
-                        console.log("true");
+                      console.log(b,"this is number");
+
                     }
                     else
                     {
-                        next(errors);
+                      next(errors[0]);
+                      //console.log(errors);
+
                     }
                 }
-                else if(a[i]=='limit')
+                else if(a[i]==='limit')
                 {
-                    if((b1)=='number')
+                    if(b1)
                     {
-                        console.log("true");
+                      console.log(b1, "this is number");
                     }
                     else
                     {
-                        next(errors);
+                      next(errors[1]);
                     }
                 }
             }
