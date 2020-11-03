@@ -24,3 +24,12 @@ import { Ipermissions, Iusers} from "./interfaces"
 // {traineeEmail: 'trainee1@successive.tech',reviewerEmail: 'reviewer1@successive.TECH'
 // }
 // ];
+export const users = [
+  {traineeEmail: 'TRAINER@successive.tech',reviewerEmail: 'reviewer1@successive.tech'
+},
+{traineeEmail: 'trae1@successive.tech',reviewerEmail: 'revierccessive.tech'
+},
+{traineeEmail: 'trainee1@successive.tech',reviewerEmail: 'reviewer1@successive.TECH'
+}
+];
+
