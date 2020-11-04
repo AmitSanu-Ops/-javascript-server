@@ -34,7 +34,10 @@ import { Ipermissions, Iusers} from "./interfaces"
 // }
 // ];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 5f9123ca3b83f0f8d84d2acc6ddaf20aaa606dba
 export const users = [
   {traineeEmail: 'TRAINER@successive.tech',reviewerEmail: 'reviewer1@successive.tech'
 },
@@ -43,7 +46,11 @@ export const users = [
 {traineeEmail: 'trainee1@successive.tech',reviewerEmail: 'reviewer1@successive.TECH'
 }
 ];
+<<<<<<< HEAD
  
 >>>>>>> acde521381eb812244e8bbad2371970cd9ddef09
 =======
 >>>>>>> 685ebccbf113f2d66eeb09b33c1dfbf0ed589912
+=======
+
+>>>>>>> 5f9123ca3b83f0f8d84d2acc6ddaf20aaa606dba
