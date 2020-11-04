@@ -2,9 +2,10 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import {notFoundHandler, errorHandler,} from './libs/routes'
 import  mainRouter from './router';
-import routes from './router'
+//import routes from './router'
+import Database from './libs/Database';
 
-console.log(bodyParser);
+//console.log(bodyParser);
 class Server {
   app;
   constructor(private config) {
@@ -41,17 +42,21 @@ class Server {
     this.app.use(bodyParser.json({ type: 'application/*+json' }));
   }
 
-  run() {
-    const {app, config: {port}} = this;
+    public run() {
+    const {app, config: {PORT,MONGO_URL}} = this;
 
-    app.listen(port, (err) => {
-      if (err) {
-      console.log(err);
-      }
-      console.log(`App is running,${port}`);
+    Database.open(MONGO_URL)
+    .then((res) => {
+      console.log("Successfully connected to Mongo")
+      app.listen(PORT, (err) => {
+        if (err) {
+        console.log(err);
+        }
+        console.log(`App is running,${PORT}`);
     });
+  })
+      .catch(err => Database.disconnect());
   }
-
   }
   export default Server;
 
