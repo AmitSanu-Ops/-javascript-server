@@ -1,6 +1,6 @@
 interface Ipermissions
 {
-    
+
         'getUsers': {
             all: string[];
             read: string[];
@@ -12,7 +12,7 @@ interface Ipermissions
             read: string[];
             write: string[];
             Delete: string[];
-        }   
+        }
 }
 
 interface Iusers{
