@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import seedData from './seedData';
 //console.log(mongoose);
 class Database {
   static open (mongoURL) {
@@ -13,6 +14,7 @@ class Database {
         reject(err);
         return;
       }
+      seedData();
       //console.log("Successfully connected to Mongo");
       resolve(null);
     })
