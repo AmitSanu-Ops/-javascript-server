@@ -1,6 +1,8 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import {notFoundHandler, errorHandler,} from './libs/routes'
+import  mainRouter from './router';
+import routes from './router'
 
 console.log(bodyParser);
 class Server {
@@ -26,10 +28,13 @@ class Server {
       res.send('I am Ok');
     });
     //return this;
+    this.app.use('/api', mainRouter);
+
     this.app.use(notFoundHandler);
 
 
     this.app.use(errorHandler);
+
   }
 
   public initBodyParser(){
