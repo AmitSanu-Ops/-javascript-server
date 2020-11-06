@@ -4,7 +4,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const routes_1 = require("./libs/routes");
 const router_1 = require("./router");
-console.log(bodyParser);
+//import routes from './router'
+const Database_1 = require("./libs/Database");
+//console.log(bodyParser);
 class Server {
     constructor(config) {
         this.config = config;
@@ -34,13 +36,18 @@ class Server {
         this.app.use(bodyParser.json({ type: 'application/*+json' }));
     }
     run() {
-        const { app, config: { port } } = this;
-        app.listen(port, (err) => {
-            if (err) {
-                console.log(err);
-            }
-            console.log(`App is running,${port}`);
-        });
+        const { app, config: { PORT, MONGO_URL } } = this;
+        Database_1.default.open(MONGO_URL)
+            .then((res) => {
+            console.log("Successfully connected to Mongo");
+            app.listen(PORT, (err) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.log(`App is running,${PORT}`);
+            });
+        })
+            .catch(err => Database_1.default.disconnect());
     }
 }
 exports.default = Server;
