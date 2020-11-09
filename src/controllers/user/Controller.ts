@@ -1,108 +1,83 @@
-class userController {
-  instance: userController
-  static instance: any;
+import { Request, Response, NextFunction } from "express";
+
+class UserController {
+  static instance: UserController
 
   static getInstance() {
-    if(userController.instance) {
-      return userController.instance
+    if (UserController.instance) {
+      return UserController.instance;
     }
-
-    userController.instance = new userController();
-    return userController.instance;
+    UserController.instance = new UserController();
+    return UserController.instance;
   }
-  get(req, res, next){
-    try{
-      console.log("Inside get method of Trainee Controller");
 
-      res.send({
-        message: "Trainees fetched successfully",
-        data: [
+  get(req: Request, res: Response, next: NextFunction) {
+    try {
+      console.log("Inside get request for user");
+      const data =
+        [
           {
-            name: "AmitSanu",
+            name: "user1",
             address: "Noida"
           }
         ]
-      });
-    } catch(err) {
-      console.log("Inside err", err);
-      next({
-        error: "Error Occured in fetching user",
-        code: 500,
-        message: err
-
-      })
+      res.status(200).send({ message: "successfully fetched users", Data: data });
+    }
+    catch (err) {
+      console.log("Inside error", err);
     }
   }
 
-  create(req, res, next){
-    try{
-      console.log("Inside get method of Trainee Controller");
-
-      res.send({
-        message: "Trainees fetched successfully",
-        data: [
+  create(req: Request, res: Response, next: NextFunction) {
+    try {
+      console.log("Inside post request for user");
+      const data =
+        [
           {
-            name: "Trainee1",
+            name: "user1",
             address: "Noida"
           }
         ]
-      });
-    } catch(err) {
-      console.log("Inside err", err);
-      next({
-        error: "Error Occured in fetching user",
-        code: 500,
-        message: err
-
-      })
+      res.status(200).send({ message: "successfully fetched users", Data: data });
+    }
+    catch (err) {
+      console.log("Inside error", err);
     }
   }
 
-  update(req, res, next){
-    try{
-      console.log("Inside get method of Trainee Controller");
-
-      res.send({
-        message: "Trainees fetched successfully",
-        data: [
+  update(req: Request, res: Response, next: NextFunction) {
+    try {
+      console.log("Inside update request for user");
+      const data =
+        [
           {
-            name: "Trainee1",
+            name: "user1",
             address: "Noida"
           }
         ]
-      });
-    } catch(err) {
-      console.log("Inside err", err);
-      next({
-        error: "Error Occured in fetching user",
-        code: 500,
-        message: err
-
-      })
+      res.status(200).send({ message: "successfully fetched users", Data: data });
+    }
+    catch (err) {
+      console.log("Inside error", err);
     }
   }
-  delete(req, res, next){
-    try{
-      console.log("Inside get method of Trainee Controller");
 
-      res.send({
-        message: "Trainees fetched successfully",
-        data: [
+  delete(req: Request, res: Response, next: NextFunction) {
+    try {
+      console.log("Inside delete request for user");
+      const data =
+        [
           {
-            name: "Trainee1",
+            name: "user1",
             address: "Noida"
           }
         ]
-      });
-    } catch(err) {
-      console.log("Inside err", err);
-      next({
-        error: "Error Occured in fetching user",
-        code: 500,
-        message: err
-
-      })
+      res.status(200).send({ message: "successfully fetched users", Data: data });
+    }
+    catch (err) {
+      console.log("Inside error", err);
     }
   }
 }
-export default new userController()
+
+export default UserController.getInstance();

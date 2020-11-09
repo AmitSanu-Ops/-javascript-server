@@ -18,6 +18,6 @@
 interface IConfig {
   PORT: number;
   NODE_ENV: string;
-  MONGO_UR: string;
+  MONGO_URL: string;
 }
 export { IConfig };
