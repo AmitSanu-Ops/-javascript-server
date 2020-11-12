@@ -3,7 +3,6 @@ import seedData from './seedData';
 //console.log(mongoose);
 class Database {
   static open (mongoURL) {
-
     return new Promise((resolve, reject) => {
 
 
