@@ -45,9 +45,9 @@ public find( query, projection?: any, options?: any ): any {
     //   console.log("UserRepository :: update ",data);
     //   return super.delete(data,id);
     //   }
-    public deleteData(id, remover) {
-        return super.delete(id, remover);
-    }
+    // public deleteData(id, remover) {
+    //     return super.delete(id, remover);
+    // }
 
 
   public count(){

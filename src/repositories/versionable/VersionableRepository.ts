@@ -47,13 +47,15 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     return this.model.find(finalQuery, projection, options);
   }
 
-  protected invalidate(id: any): DocumentQuery<D, D>{
-    return this.model.update({ originalId: id, deletedAt: null}, {}  )
-  }
-  // async delete(id) {
-  //   return await this.model.update({ originalId: id },{});
+  // protected invalidate(id: any): DocumentQuery<D, D>{
+  //   return this.model.update({ originalId: id, deletedAt: null}, {}  )
   // }
 
+  protected invalidate(id): DocumentQuery<D, D> {
+    const query: any = { originalId: id, deletedAt: { $exists: false } };
+    const data: any = { deletedAt: Date.now() };
+    return this.model.updateOne(query, data);
+}
 
   public async update(data:any, id:string):Promise<D>{
     // console.log("Looking for privious valid document ");
@@ -90,33 +92,44 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     }
 
 ///////////////////////////////////////////////////////////////////
-public async delete(id: string, remover: string) {
+// // public async delete(id: string, remover: string) {
 
-  let originalData;
+// //   let originalData;
 
-  await this.findOne({ _id: id, deletedAt: null })
-      .then((data) => {
-          if (data === null) {
-              throw '';
-          }
+// //   await this.findOne({ _id: id, deletedAt: null })
+// //       .then((data) => {
+// //           if (data === null) {
+// //               throw '';
+// //           }
 
-          originalData = data;
-          const oldId = originalData._id;
+// //           originalData = data;
+// //           const oldId = originalData._id;
 
-          const modelDelete = {
-              ...originalData,
-              deletedAt: Date.now(),
-              deletedBy: remover,
-          };
+// //           const modelDelete = {
+// //               ...originalData,
+// //               deletedAt: Date.now(),
+// //               deletedBy: remover,
+// //           };
 
-          this.model.updateOne({ _id: oldId }, modelDelete)
-              .then((res) => {
-                  if (res === null) {
-                      throw '';
-                  }
-              });
+// //           this.model.updateOne({ _id: oldId }, modelDelete)
+// //               .then((res) => {
+// //                   if (res === null) {
+// //                       throw '';
+// //                   }
+// //               });
 
-      });
+// //       });
+// }
+
+public async delete(id: any): Promise<D> {
+  console.log(id.originalId);
+  const prev = await this.findOne({ originalId: id.originalId, deletedAt: undefined });
+  if (prev) {
+      return await this.invalidate(id.originalId);
+  }
+  else {
+      return undefined;
+  }
 }
 
 }

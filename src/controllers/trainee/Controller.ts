@@ -161,27 +161,22 @@ try {
   }
 }
 
-public  remove(req, res, next) {
-
-  const  id  = req.query.id;
-  const userData = userModel.findOne({originalId:id})
-  console.log(id,"hhhhh")
-  const remover = "amit";
-  console.log(remover," remover")
-  const user = new UserRepository();
-   user.delete(id, remover)
-  .then((result) => {
-      res.send({
-          message: 'Deleted successfully',result,
-          code: 200
+delete(req: Request, res: Response, next: NextFunction) {
+  try {
+      const userRepository = new UserRepository();
+      userRepository.delete(req.body);
+      res.status(200).send({
+          message: 'trainee deleted successfully',
+          data: [
+              {
+                  'action': `data has deleted with id -> ${req.body.originalId}`
+              }
+          ],
+          status: 'success',
       });
-  })
-  .catch ((err) => {
-      res.send({
-          message: 'User not found to be deleted',
-          code: 404
-      });
-  });
+  } catch (err) {
+      console.log('error is ', err);
+  }
 }
 }
 export default new TraineeController()
