@@ -11,12 +11,12 @@ export default (module, permissionType) => (req, res, next) => {
     console.log("Header is", req.headers['authorization'])
     const token = req.headers['authorization']
 
-    const decoderUser = jwt.verify(token, 'MyhkoyENQ9QwIv3eoAJagvYOQnV5xgDb');
+    const decoderUser = jwt.verify(token, 'qwertyuiopasdfghjklzxcvbnm123456');
 
     console.log('User', decoderUser);
     if(hasPermission(permissions.getUser,decoderUser.role,permissionType))
     {
-      console.log(`${decoderUser.role} has permission ${permissionType} : true`);
+      console.log(`${decoderUser.role} haspermission ${permissionType} : true`);
       next();
     }
     else

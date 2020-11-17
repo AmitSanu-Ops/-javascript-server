@@ -8,11 +8,11 @@ import { permissions } from '../../libs/constants';
 import config from './validation';
 const userRouter =  Router();
 userRouter.route('/')
-      .get(validationHandler(validation.get), userController.get)
+      .get(authMiddlware('getUser','read'),validationHandler(validation.get), userController.get)
      // .get(userController.get)
-      .post(validationHandler(validation.get),userController.create)
-      .put(validationHandler(validation.get),userController.update)
-      .delete(validationHandler(validation.get),userController.delete);
+      .post(authMiddlware('getUser','read'),validationHandler(validation.get),userController.create)
+      .put(authMiddlware('getUser','read'),validationHandler(validation.get),userController.update)
+      .delete(authMiddlware('getUser','read'),validationHandler(validation.get),userController.delete);
 //export default userRouter;
 
 // const userRouter = express.Router();
@@ -27,7 +27,7 @@ userRouter.route('/me')
 .get(authMiddlware ( permissions.getUser, 'read' ),  userController.me);
 
 userRouter.route('/login')
-.post( validationHandler ( config.login ), userController.login );
+.post(userController.login,authMiddlware('getUser','read'), validationHandler ( config.login ) );
 
 export default userRouter;
 

@@ -1,7 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import { userModel } from '../../repositories/user/UserModel';
 import * as jwt from 'jsonwebtoken';
-
+import  * as bcrypt from 'bcrypt';
+//import config from '../trainee/validation';
+import config from '../../config/configuration';
 
 class userController {
   instance: userController
@@ -96,15 +98,17 @@ class userController {
 
 
   login( req: Request, res: Response, next: NextFunction ) {
-    try { const { email , id } = req.body;
-
+    try {
+       const { email , password } = req.body;
+      console.log(email)
     userModel.findOne ( { email: email }, ( err, result ) => {
         if ( result ) {
-            if ( id === result.id ) {
+            if ( bcrypt.compareSync(password,result.password)) {
                 console.log ( 'result is' , result.id );
-                const token = jwt.sign ( {
-                    result
-                }, 'qwertyuiopasdfghjklzxcvbnm123456' );
+                // const token = jwt.sign ( {
+                //     result
+                // }, 'qwertyuiopasdfghjklzxcvbnm123456' );
+                const token = jwt.sign({result}, config.secretKey);
             console.log( token );
             res.send({
                 data: token,

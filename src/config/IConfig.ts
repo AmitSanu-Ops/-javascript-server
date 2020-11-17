@@ -19,5 +19,7 @@ interface IConfig {
   PORT: number;
   NODE_ENV: string;
   MONGO_URL: string;
+  password: string;
+  secretKey: string;
 }
 export { IConfig };
