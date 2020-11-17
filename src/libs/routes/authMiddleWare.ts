@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import { hasPermission } from '../../libs/permissions'
+import { hasPermission } from '../../libs/permissions';
 import { permissions } from '../../libs/constants';
 
 
@@ -12,7 +12,6 @@ export default (module, permissionType) => (req, res, next) => {
     const token = req.headers['authorization']
     const decoderUser = jwt.verify(token, 'qwertyuiopasdfghjklzxcvbnm123456')
     console.log('User', decoderUser);
-
 
     //let a = decoderUser.role;
     //console.log(a);
