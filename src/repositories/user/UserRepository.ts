@@ -36,21 +36,18 @@ public find( query, projection?: any, options?: any ): any {
     return model.save();
 
   }
-  public update(data: any): Promise<IUserModel> {
-    console.log('UserRepositorty:: update', data);
-    return super.update(data);
-  }
-public delete(data: any): Promise<IUserModel> {
-  console.log('UserRepository :: delete ', data)
-  const model = new userModel({
-     ...data,
-    //originalId: id,
-    //...data,
-  });
-  //return model.save();
-  return super.delete(data);
+  public update(data:any, id:any):Promise<IUserModel>{
+    console.log("UserRepository :: update ",data);
+    return super.update(data,id);
+    }
 
-}
+    // public delete(data:any, id:any){
+    //   console.log("UserRepository :: update ",data);
+    //   return super.delete(data,id);
+    //   }
+    public deleteData(id, remover) {
+        return super.delete(id, remover);
+    }
 
 
   public count(){

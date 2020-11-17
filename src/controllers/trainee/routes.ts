@@ -8,8 +8,8 @@ const traineeRouter =  Router();
       .get(validationHandler(validation.get),TraineeController.get)
      // .get(TraineeController.get)
       .post(validationHandler(validation.create),TraineeController.create)
-      .put(validationHandler(validation.update),TraineeController.update)
-      .delete(validationHandler(validation.delete),TraineeController.delete);
+      .put(TraineeController.update,validationHandler(validation.update))
+      .delete(TraineeController.remove,validationHandler(validation.delete));
 
-      //traineeRouter.delete('/trainee/:id', validationHandler(validation.delete), TraineeController.delete);
+      //traineeRouter.delete('/trainee/:id', TraineeController.remove, validationHandler(validation.delete));
 export default traineeRouter;
