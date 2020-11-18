@@ -32,6 +32,10 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     return this.model.countDocuments(finalQuery);
   }
 
+  public async getUser(data: any){
+    return await this.model.findOne(data);
+  }
+
   public getAll(query: any, projection: any = {}, options: any = {}): DocumentQuery<D[], D>{
     const finalQuery = { deletedAt: null, ...query};
     return this.model.find(finalQuery, projection, options);

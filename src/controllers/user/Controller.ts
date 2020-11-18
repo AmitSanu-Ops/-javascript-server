@@ -4,6 +4,8 @@ import * as jwt from 'jsonwebtoken';
 import  * as bcrypt from 'bcrypt';
 //import config from '../trainee/validation';
 import config from '../../config/configuration';
+import UserRepository from '../../repositories/user/UserRepository';
+import IRequest from '../../libs/IRequest';
 
 class userController {
   instance: userController
@@ -108,7 +110,11 @@ class userController {
                 // const token = jwt.sign ( {
                 //     result
                 // }, 'qwertyuiopasdfghjklzxcvbnm123456' );
-                const token = jwt.sign({result}, config.secretKey);
+                const token = jwt.sign({result}, config.secretKey, {
+
+                  expiresIn: '15m' // expires in 15 min
+
+             });
             console.log( token );
             res.send({
                 data: token,
@@ -136,13 +142,11 @@ class userController {
     }
 }
 
-me( req: Request, res: Response, next: NextFunction ) {
-    //const data = req.userdata;
-   res.json ( {
-      //  data
-   } );
+me( req, res: Response, next: NextFunction ) {
+  const  user = req.user;
+  console.log(user,"USER")
+  return res.status(200).send({message: 'Me', status: 'ok', data:user});
 }
 }
 
-
-export default  new userController()
+export default  new userController();

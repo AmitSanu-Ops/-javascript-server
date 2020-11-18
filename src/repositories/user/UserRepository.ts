@@ -48,6 +48,9 @@ public find( query, projection?: any, options?: any ): any {
     // public deleteData(id, remover) {
     //     return super.delete(id, remover);
     // }
+    public getUser(data){
+      return super.getUser(data);
+    }
 
 
   public count(){
