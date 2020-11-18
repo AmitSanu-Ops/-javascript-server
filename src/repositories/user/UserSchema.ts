@@ -13,5 +13,4 @@ class UserSchema extends VersionableSchema {
     super(baseSchema, options);
   }
 }
-
 export default UserSchema;

@@ -12,7 +12,6 @@ class TraineeController {
     this.update = this.update.bind(this);
     //this.delete = this.delete.bind(this);
   }
-
   userRepository: UserRepository = new UserRepository()
   //instance:
   static instance: TraineeController;

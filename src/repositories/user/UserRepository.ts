@@ -52,7 +52,6 @@ public find( query, projection?: any, options?: any ): any {
       return super.getUser(data);
     }
 
-
   public count(){
     return userModel.countDocuments();
   }

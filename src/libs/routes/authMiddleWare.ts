@@ -36,5 +36,4 @@ export default (module, permissionType) => (req:IRequest, res, next) => {
 
     })
   }
-
 }
