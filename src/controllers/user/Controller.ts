@@ -139,6 +139,4 @@ me( req: Request, res: Response, next: NextFunction ) {
    } );
 }
 }
-
-
 export default  new userController()

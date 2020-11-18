@@ -49,9 +49,7 @@ public find( query, projection?: any, options?: any ): any {
     //     return super.delete(id, remover);
     // }
 
-
   public count(){
     return userModel.countDocuments();
   }
 }
-
