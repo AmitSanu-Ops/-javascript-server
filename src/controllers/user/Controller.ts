@@ -1,3 +1,8 @@
+import { Request, Response, NextFunction } from 'express';
+import { userModel } from '../../repositories/user/UserModel';
+import * as jwt from 'jsonwebtoken';
+
+
 class userController {
   instance: userController
   static instance: any;
@@ -7,18 +12,20 @@ class userController {
       return userController.instance
     }
 
+
     userController.instance = new userController();
     return userController.instance;
   }
-  get(req, res, next){
+
+  get(req, res, next) {
     try{
-      console.log("Inside get method of Trainee Controller");
+      console.log("Inside get method of User Controller");
 
       res.send({
-        message: "Trainees fetched successfully",
+        message: "Users fetched successfully",
         data: [
           {
-            name: "AmitSanu",
+            name: "User1",
             address: "Noida"
           }
         ]
@@ -29,80 +36,109 @@ class userController {
         error: "Error Occured in fetching user",
         code: 500,
         message: err
-
       })
     }
   }
 
-  create(req, res, next){
+  create(req, res, next) {
     try{
-      console.log("Inside get method of Trainee Controller");
+      console.log("Inside post method of user Controller");
 
       res.send({
-        message: "Trainees fetched successfully",
+        message: "user created successfully",
         data: [
           {
-            name: "Trainee1",
+            name: "user1",
             address: "Noida"
           }
         ]
       });
     } catch(err) {
       console.log("Inside err", err);
-      next({
-        error: "Error Occured in fetching user",
-        code: 500,
-        message: err
-
-      })
     }
   }
 
-  update(req, res, next){
+  update(req, res, next) {
     try{
-      console.log("Inside get method of Trainee Controller");
+      console.log("Inside update method of user Controller");
 
       res.send({
-        message: "Trainees fetched successfully",
+        message: "users updated successfully",
         data: [
           {
-            name: "Trainee1",
+            name: "user1",
             address: "Noida"
           }
         ]
       });
     } catch(err) {
       console.log("Inside err", err);
-      next({
-        error: "Error Occured in fetching user",
-        code: 500,
-        message: err
-
-      })
     }
-  }
-  delete(req, res, next){
+  };
+
+  delete(req , res , next) {
     try{
-      console.log("Inside get method of Trainee Controller");
+      console.log("Inside delete method of user Controller");
 
       res.send({
-        message: "Trainees fetched successfully",
+        message: "user deleted successfully",
         data: [
           {
-            name: "Trainee1",
+            name: "user1",
             address: "Noida"
           }
         ]
       });
     } catch(err) {
       console.log("Inside err", err);
-      next({
-        error: "Error Occured in fetching user",
-        code: 500,
-        message: err
-
-      })
     }
   }
+
+
+  login( req: Request, res: Response, next: NextFunction ) {
+    try { const { email , id } = req.body;
+
+    userModel.findOne ( { email: email }, ( err, result ) => {
+        if ( result ) {
+            if ( id === result.id ) {
+                console.log ( 'result is' , result.id );
+                const token = jwt.sign ( {
+                    result
+                }, 'qwertyuiopasdfghjklzxcvbnm123456' );
+            console.log( token );
+            res.send({
+                data: token,
+                message: 'Login Permited',
+                status: 200
+            } );
+            }
+            else {
+                res.send ( {
+                    message: 'id Doesnt Match',
+                    status: 400
+                } );
+            }
+        }
+        else {
+                    res.send ( {
+                        message: 'Email is not Registered',
+                        status:   404
+                    } );
+        }
+    } ) ;
 }
-export default new userController()
+    catch ( err ) {
+        res.send( err );
+    }
+}
+
+me( req: Request, res: Response, next: NextFunction ) {
+    //const data = req.userdata;
+   res.json ( {
+      //  data
+   } );
+}
+}
+
+
+export default  new userController()
