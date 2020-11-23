@@ -24,16 +24,37 @@ class TraineeController {
     TraineeController.instance = new TraineeController();
     return TraineeController.instance;
   }
-  get = (req, res, next) =>{
+  get = async(req, res, next) =>{
     try{
       console.log("Inside get method of Trainee Controller");
-      this.userRepository.find({},{}, {})
+      let sort: any;
+      let sortc: any;
+      if (req.query.sort === 'email') {
+          sort = {email: -1 };
+      }
+      else if (req.query.sort === 'name') {
+          sort = {name: -1 };
+      }
+      else
+      sort = { createdAt: -1 };
+
+      const trainee =  await this.userRepository.list1( sortc, sort, req.query.skip, req.query.limit);
+      await this.userRepository.find({},{}, {})
+
       .then((res1)=>{
-        console.log('Response is', res1);
-        res.status(200).send({
-          message: "Trainees fetched successfully",
-          data: res1
+
+        userModel.countDocuments({},function(err,Count_of_trainee){
+          console.log("Count_of_trainee = ",Count_of_trainee)
+          console.log('Response is', res1);
+          res.status(200).send({
+            message: "Trainees fetched successfully",
+            data: trainee,
+            Totalcount : Count_of_trainee,
+            count : trainee.length,
+
+          })
         })
+
       })
 
      // VersionableRep`ositry.prototype.create()

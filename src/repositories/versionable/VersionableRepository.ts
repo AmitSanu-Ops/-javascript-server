@@ -136,4 +136,9 @@ public async delete(id: any): Promise<D> {
   }
 }
 
+public async list(sortc, sort, skip, limit): Promise<D[]> {
+  return this.model.find({}).sort(sort).skip(Number(skip)).limit(Number(limit));
+}
+
+
 }
