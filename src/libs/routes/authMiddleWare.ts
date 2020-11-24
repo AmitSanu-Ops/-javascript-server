@@ -22,7 +22,6 @@ export default (module, permissionType) => (req, res, next) => {
     else
     {
       throw error;
-
     }
   } catch(err) {
     next({
