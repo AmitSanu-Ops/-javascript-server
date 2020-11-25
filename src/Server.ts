@@ -1,65 +1,3 @@
-// import * as express from 'express';
-// import * as bodyParser from 'body-parser';
-// import {notFoundHandler, errorHandler,} from './libs/routes'
-// import  mainRouter from './router';
-// //import routes from './router'
-// import Database from './libs/Database';
-
-// //console.log(bodyParser);
-// class Server {
-//   app;
-//   constructor(private config) {
-//       this.app = express();
-
-//     }
-//   bootstrap() {
-//     this.setupRoutes();
-//     this.initBodyParser();
-//     return this;
-//   }
-//   public setupRoutes() {
-//     const {app} = this;
-//     this.app.use('/',(req, res, next)=>{
-//       console.log("Inside first middleware");
-//       next()
-//     })
-
-//     app.get('/health-check', (req, res, next) => {
-//       console.log("Inside second middleware");
-//       res.send('I am Ok');
-//     });
-//     //return this;
-//     this.app.use('/api', mainRouter);
-
-//     this.app.use(notFoundHandler);
-
-
-//     this.app.use(errorHandler);
-
-//   }
-
-//   public initBodyParser(){
-//     this.app.use(bodyParser.json());
-//   }
-
-//     public run() {
-//     const {app, config: {PORT,MONGO_URL}} = this;
-
-//     Database.open(MONGO_URL)
-//     .then((res) => {
-//       console.log("Successfully connected to Mongo")
-//       app.listen(PORT, (err) => {
-//         if (err) {
-//         console.log(err);
-//         }
-//         console.log(`App is running,${PORT}`);
-//     });
-//   })
-//       .catch(err => Database.disconnect());
-//   }
-//   }
-//   export default Server;
-
 import * as express from "express";
 import { Request, Response, NextFunction } from "express";
 import * as bodyParser from "body-parser";
@@ -67,6 +5,8 @@ import { notFoundHandler, errorHandler } from './libs/routes';
 import {IConfig} from "./config/IConfig";
 import mainRouter from "./router";
 import Database from "./libs/Database";
+import * as swaggerJsDoc from 'swagger-jsdoc';
+import * as swaggerUI from 'swagger-ui-express';
 
 class Server {
 app:express.Express
@@ -81,12 +21,36 @@ this.setupRouts();
 return this;
 }
 
+initSwagger = () => {
+    const options = {
+        definition: {
+            info: {
+                title: 'JavaScript-Server API Swagger',
+                version: '1.0.0',
+            },
+            securityDefinitions: {
+                Bearer: {
+                    type: 'apiKey',
+                    name: 'Authorization',
+                    in: 'headers'
+                }
+            }
+        },
+        basePath: '/api',
+        swagger: '4.1',
+        apis: ['./src/controllers/**/routes.ts'],
+    };
+    const swaggerSpec = swaggerJsDoc(options);
+    return swaggerSpec;
+}
+
 setupRouts() {
 const { app } = this;
 app.use((req:Request,res:Response,next:NextFunction) => {
 console.log('Inside First MidleWare');
 next();
 });
+app.use('/swagger', swaggerUI.serve, swaggerUI.setup(this.initSwagger()));
 
 app.use('/health-check', (req:Request,res:Response,next:NextFunction) => {
 console.log('Inside Second MidleWare');

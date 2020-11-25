@@ -56,8 +56,8 @@ public find( query, projection?: any, options?: any ): any {
     return userModel.countDocuments();
   }
 
-  public list1(sortc, sort, skip, limit){
-    return super.list( sortc, sort, skip, limit);
+  public list1(userRole, sort, skip, limit, searchBy){
+    return super.list( userRole,sort, skip, limit, searchBy);
  }
 }
 

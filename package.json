@@ -14,7 +14,9 @@
     "mongoose": "^5.10.11",
     "nodemon": "^2.0.6",
     "query-string": "^6.13.7",
-    "save-dev": "0.0.1-security"
+    "save-dev": "0.0.1-security",
+    "swagger-jsdoc": "^5.0.1",
+    "swagger-ui-express": "^4.1.5"
   },
   "devDependencies": {
     "@babel/node": "^7.12.1",

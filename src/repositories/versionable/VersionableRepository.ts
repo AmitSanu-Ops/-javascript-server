@@ -36,7 +36,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     return await this.model.findOne(data);
   }
 
-  public getAll(query: any, projection: any = {}, options: any = {}): DocumentQuery<D[], D>{
+  public getAll(query: any = {}, projection: any = {}, options: any = {}): DocumentQuery<D[], D>{
     const finalQuery = { deletedAt: null, ...query};
     return this.model.find(finalQuery, projection, options);
   }
@@ -127,7 +127,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
 
 public async delete(id: any): Promise<D> {
   console.log(id.originalId);
-  const prev = await this.findOne({ originalId: id.originalId, deletedAt: undefined });
+  const prev = await this.findOne({ originalId: id.originalId, deletedAt: undefined, deletedBy: undefined });
   if (prev) {
       return await this.invalidate(id.originalId);
   }
@@ -136,8 +136,8 @@ public async delete(id: any): Promise<D> {
   }
 }
 
-public async list(sortc, sort, skip, limit): Promise<D[]> {
-  return this.model.find({}).sort(sort).skip(Number(skip)).limit(Number(limit));
+public async list(userRole, sort, skip, limit, searchBy): Promise<D[]> {
+  return this.model.find({role:userRole, deletedAt: undefined, ...searchBy}).sort(sort).skip(Number(skip)).limit(Number(limit));
 }
 
 

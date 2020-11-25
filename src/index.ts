@@ -9,3 +9,4 @@ const server = new Server(config);
 // });
 
 server.bootstrap().run();
+server.initSwagger();

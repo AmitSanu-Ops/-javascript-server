@@ -4,6 +4,7 @@ import UserRepository from '../../repositories/user/UserRepository';
 import VersionableRepositry from '../../repositories/versionable/VersionableRepository'
 import { Router } from 'express';
 import {userModel} from '../../repositories/user/UserModel'
+import * as bcrypt from "bcrypt";
 class TraineeController {
 
   constructor(){
@@ -28,7 +29,10 @@ class TraineeController {
     try{
       console.log("Inside get method of Trainee Controller");
       let sort: any;
-      let sortc: any;
+      let userRole: any;
+
+      let trainee: any;
+
       if (req.query.sort === 'email') {
           sort = {email: -1 };
       }
@@ -37,9 +41,23 @@ class TraineeController {
       }
       else
       sort = { createdAt: -1 };
+      let search: any;
+            if (req.query.searchBy !== undefined) {
+                search = await this.userRepository.list1('trainee',sort, req.query.skip, req.query.limit, { name: {$regex: req.query.searchBy}});
+                const list = await this.userRepository.list1( 'trainee',sort, req.query.skip, req.query.limit, { email: { $regex: req.query.searchBy.toLowerCase()}});
+                trainee = { ...search, ...list};
 
-      const trainee =  await this.userRepository.list1( sortc, sort, req.query.skip, req.query.limit);
-      await this.userRepository.find({},{}, {})
+            }
+            else {
+            // trainee = await this.userRepository.list1('trainee', sort, req.query.skip, req.query.limit, {});
+             trainee =  await this.userRepository.list1( 'trainee',sort, req.query.skip, req.query.limit,{});
+            }
+
+            console.log(trainee,"hjahhhhhhhhhha");
+
+ //const
+        const traineeData = Object.values(trainee)
+      await this.userRepository.getAll()
 
       .then((res1)=>{
 
@@ -48,9 +66,10 @@ class TraineeController {
           console.log('Response is', res1);
           res.status(200).send({
             message: "Trainees fetched successfully",
-            data: trainee,
+            //data: trainee,
             Totalcount : Count_of_trainee,
-            count : trainee.length,
+            count : traineeData.length,
+            record: traineeData
 
           })
         })
@@ -74,7 +93,7 @@ class TraineeController {
     try{
       console.log("Inside get method of Trainee Controller");
 
-      this.userRepository.create({role: req.body.role, name:req.body.name})
+      this.userRepository.create({role: req.body.role, name:req.body.name, email:req.body.email, password: bcrypt.hashSync(req.body.password,10)})
       .then((res)=>{
         console.log('Response is', res);
       })
