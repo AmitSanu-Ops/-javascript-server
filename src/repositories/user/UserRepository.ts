@@ -60,4 +60,3 @@ public find( query, projection?: any, options?: any ): any {
     return super.list( sortc, sort, skip, limit);
  }
 }
-
