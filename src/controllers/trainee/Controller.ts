@@ -120,56 +120,7 @@ class TraineeController {
     }
   }
 
-  // update = (req, res, next) =>{
-  //   try{
-  //     console.log("Inside get method of Trainee Controller");
-  //     const { id } = req.body;
-  //     this.userRepository.findById(id)
-  //     //this.update.name
-  //     .then((res)=>{
-  //       console.log('Response is', res);
-  //     })
 
-
-  //     res.send({
-  //       message: "Trainees updated successfully",
-  //       data: [
-  //         {
-  //           name: "Trainee1",
-  //           address: "Noida"
-  //         }
-  //       ]
-  //     });
-  //   } catch(err) {
-  //     console.log("Inside err", err);
-  //     next({
-  //       error: "Error Occured in fetching user",
-  //       code: 500,
-  //       message: err
-
-  //     })
-  //   }
-  // }
-
-//   public async update(req, res, next) {
-//     const { id, dataToUpdate } = req.body;
-//     const up = req.userData.id;
-//     const user = new UserRepository();
-//     await user.update( id , dataToUpdate, up)
-//     .then((result) => {
-//         res.send({
-//             message: 'User Updated',
-//             code: 200
-//         });
-//     })
-//     .catch ((err) => {
-//         res.send({
-//             'err': err,
-//             error: 'User Not Found for update',
-//             code: 404
-//         });
-//     });
-// }
 update = (req, res, next) =>{
 try {
 
@@ -199,23 +150,50 @@ try {
   console.log("Inside error", err);
   }
 }
-
-delete(req: Request, res: Response, next: NextFunction) {
+////////////////////////////////////////////////////////////////////////////
+// delete(req: Request, res: Response, next: NextFunction) {
+//   try {
+//       const userRepository = new UserRepository();
+//       userRepository.delete(req.body);
+//       res.status(200).send({
+//           message: 'trainee deleted successfully',
+//           data: [
+//               {
+//                   'action': `data has deleted with id -> ${req.body.originalId}`
+//               }
+//           ],
+//           status: 'success',
+//       });
+//   } catch (err) {
+//       console.log('error is ', err);
+//   }
+// }
+/////////////////////////////////////////////////////////////////////////////////////
+public delete = (req, res, next) => {
   try {
-      const userRepository = new UserRepository();
-      userRepository.delete(req.body);
-      res.status(200).send({
-          message: 'trainee deleted successfully',
-          data: [
-              {
-                  'action': `data has deleted with id -> ${req.body.originalId}`
-              }
-          ],
-          status: 'success',
-      });
-  } catch (err) {
-      console.log('error is ', err);
+      const id = req.query.id;
+      const userData = userModel.findOne({ originalId: id })
+      userModel.findOne({ originalId: id })
+      console.log(id, "  Value of ID")
+      const remover = id;
+      console.log(remover, " remover")
+      const user = new UserRepository();
+      user.delete(id, remover)
+          .then((result) => {
+              res.send({
+                  status: 'OK',
+                  message: 'Deleted successfully', result,
+                  code: 200,
+                  data: result
+              });
+          })
   }
+  catch (err) {
+      res.send({
+          message: 'User not found to be deleted',
+          code: 404
+      });
+  };
 }
 }
 export default new TraineeController()

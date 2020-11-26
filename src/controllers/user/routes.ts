@@ -17,6 +17,15 @@ userRouter.route('/')
  * @swagger
  *
  *  definitions:
+ *      me:
+ *        type: object
+ *        properties:
+ *          email:
+ *              type: string
+ *              example: trainee@successive.tech
+ *          password:
+ *              type: string
+ *              example: training@123
  *      Login:
  *        type: object
  *        properties:
@@ -42,6 +51,8 @@ userRouter.route('/')
  *
  * /api/user/me:
  *   get:
+ *     tags:
+ *       - User
  *     description: Current user Details.
  *     security:
  *       - Bearer: []
@@ -62,6 +73,8 @@ userRouter.route('/me')
  *
  * /api/user/login:
  *   post:
+ *     tags:
+ *       - User
  *     description: Login Credentials
  *     security:
  *       - Bearer: []

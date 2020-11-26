@@ -67,6 +67,8 @@ const traineeRouter =  Router();
  *
  * /api/trainee:
  *   get:
+ *     tags:
+ *       - Trainee
  *     description: List of all the trainees
  *     security:
  *       - Bearer: []
@@ -128,6 +130,8 @@ const traineeRouter =  Router();
  *
  * /api/trainee:
  *   post:
+ *     tags:
+ *       - Trainee
  *     description: Returns the success reponse on creation
  *     security:
  *          - Bearer: []
@@ -173,6 +177,8 @@ const traineeRouter =  Router();
  *
  * /api/trainee:
  *   put:
+ *     tags:
+ *       - Trainee
  *     description: Returns the success reponse on Updation
  *     security:
  *          - Bearer: []
@@ -219,6 +225,8 @@ const traineeRouter =  Router();
  *
  * /api/trainee:
  *   delete:
+ *     tags:
+ *       - Trainee
  *     description: Returns the success reponse on deletion
  *     security:
  *       - Bearer: []

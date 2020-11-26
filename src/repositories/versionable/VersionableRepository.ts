@@ -96,45 +96,45 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     }
 
 ///////////////////////////////////////////////////////////////////
-// // public async delete(id: string, remover: string) {
+public async delete(id: string, remover: string) {
 
-// //   let originalData;
+  let originalData;
 
-// //   await this.findOne({ _id: id, deletedAt: null })
-// //       .then((data) => {
-// //           if (data === null) {
-// //               throw '';
-// //           }
+  const data = await this.findOne({ _id: id, deletedAt: null })
+      if(data) {
+          if (data === null) {
+              throw '';
+          }
 
-// //           originalData = data;
-// //           const oldId = originalData._id;
+          originalData = data;
+          const oldId = originalData._id;
 
-// //           const modelDelete = {
-// //               ...originalData,
-// //               deletedAt: Date.now(),
-// //               deletedBy: remover,
-// //           };
+          const modelDelete = {
+              ...originalData,
+              deletedAt: Date.now(),
+              deletedBy: remover,
+          };
 
-// //           this.model.updateOne({ _id: oldId }, modelDelete)
-// //               .then((res) => {
-// //                   if (res === null) {
-// //                       throw '';
-// //                   }
-// //               });
+          this.model.updateOne({ _id: oldId }, modelDelete)
+              .then((res) => {
+                  if (res === null) {
+                      throw '';
+                  }
+              });
 
-// //       });
-// }
-
-public async delete(id: any): Promise<D> {
-  console.log(id.originalId);
-  const prev = await this.findOne({ originalId: id.originalId, deletedAt: undefined, deletedBy: undefined });
-  if (prev) {
-      return await this.invalidate(id.originalId);
-  }
-  else {
-      return undefined;
-  }
+      };
 }
+////////////////////////////////////////////////////////////////////////
+// public async delete(id: any): Promise<D> {
+//   console.log(id.originalId);
+//   const prev = await this.findOne({ originalId: id.originalId, deletedAt: undefined, deletedBy: undefined });
+//   if (prev) {
+//       return await this.invalidate(id.originalId);
+//   }
+//   else {
+//       return undefined;
+//   }
+// }
 
 public async list(userRole, sort, skip, limit, searchBy): Promise<D[]> {
   return this.model.find({role:userRole, deletedAt: undefined, ...searchBy}).sort(sort).skip(Number(skip)).limit(Number(limit));
