@@ -4,6 +4,7 @@ import UserRepository from '../../repositories/user/UserRepository';
 import VersionableRepositry from '../../repositories/versionable/VersionableRepository'
 import { Router } from 'express';
 import {userModel} from '../../repositories/user/UserModel'
+import * as bcrypt from "bcrypt";
 class TraineeController {
 
   constructor(){
@@ -28,7 +29,10 @@ class TraineeController {
     try{
       console.log("Inside get method of Trainee Controller");
       let sort: any;
-      let sortc: any;
+      let userRole: any;
+
+      let trainee: any;
+
       if (req.query.sort === 'email') {
           sort = {email: -1 };
       }
@@ -37,9 +41,23 @@ class TraineeController {
       }
       else
       sort = { createdAt: -1 };
+      let search: any;
+            if (req.query.searchBy !== undefined) {
+                search = await this.userRepository.list1('trainee',sort, req.query.skip, req.query.limit, { name: {$regex: req.query.searchBy}});
+                const list = await this.userRepository.list1( 'trainee',sort, req.query.skip, req.query.limit, { email: { $regex: req.query.searchBy.toLowerCase()}});
+                trainee = { ...search, ...list};
 
-      const trainee =  await this.userRepository.list1( sortc, sort, req.query.skip, req.query.limit);
-      await this.userRepository.find({},{}, {})
+            }
+            else {
+            // trainee = await this.userRepository.list1('trainee', sort, req.query.skip, req.query.limit, {});
+             trainee =  await this.userRepository.list1( 'trainee',sort, req.query.skip, req.query.limit,{});
+            }
+
+            console.log(trainee,"hjahhhhhhhhhha");
+
+ //const
+        const traineeData = Object.values(trainee)
+      await this.userRepository.getAll()
 
       .then((res1)=>{
 
@@ -48,9 +66,10 @@ class TraineeController {
           console.log('Response is', res1);
           res.status(200).send({
             message: "Trainees fetched successfully",
-            data: trainee,
+            //data: trainee,
             Totalcount : Count_of_trainee,
-            count : trainee.length,
+            count : traineeData.length,
+            record: traineeData
 
           })
         })
@@ -74,7 +93,7 @@ class TraineeController {
     try{
       console.log("Inside get method of Trainee Controller");
 
-      this.userRepository.create({role: req.body.role, name:req.body.name})
+      this.userRepository.create({role: req.body.role, name:req.body.name, email:req.body.email, password: bcrypt.hashSync(req.body.password,10)})
       .then((res)=>{
         console.log('Response is', res);
       })
@@ -101,56 +120,7 @@ class TraineeController {
     }
   }
 
-  // update = (req, res, next) =>{
-  //   try{
-  //     console.log("Inside get method of Trainee Controller");
-  //     const { id } = req.body;
-  //     this.userRepository.findById(id)
-  //     //this.update.name
-  //     .then((res)=>{
-  //       console.log('Response is', res);
-  //     })
 
-
-  //     res.send({
-  //       message: "Trainees updated successfully",
-  //       data: [
-  //         {
-  //           name: "Trainee1",
-  //           address: "Noida"
-  //         }
-  //       ]
-  //     });
-  //   } catch(err) {
-  //     console.log("Inside err", err);
-  //     next({
-  //       error: "Error Occured in fetching user",
-  //       code: 500,
-  //       message: err
-
-  //     })
-  //   }
-  // }
-
-//   public async update(req, res, next) {
-//     const { id, dataToUpdate } = req.body;
-//     const up = req.userData.id;
-//     const user = new UserRepository();
-//     await user.update( id , dataToUpdate, up)
-//     .then((result) => {
-//         res.send({
-//             message: 'User Updated',
-//             code: 200
-//         });
-//     })
-//     .catch ((err) => {
-//         res.send({
-//             'err': err,
-//             error: 'User Not Found for update',
-//             code: 404
-//         });
-//     });
-// }
 update = (req, res, next) =>{
 try {
 
@@ -180,23 +150,50 @@ try {
   console.log("Inside error", err);
   }
 }
-
-delete(req: Request, res: Response, next: NextFunction) {
+////////////////////////////////////////////////////////////////////////////
+// delete(req: Request, res: Response, next: NextFunction) {
+//   try {
+//       const userRepository = new UserRepository();
+//       userRepository.delete(req.body);
+//       res.status(200).send({
+//           message: 'trainee deleted successfully',
+//           data: [
+//               {
+//                   'action': `data has deleted with id -> ${req.body.originalId}`
+//               }
+//           ],
+//           status: 'success',
+//       });
+//   } catch (err) {
+//       console.log('error is ', err);
+//   }
+// }
+/////////////////////////////////////////////////////////////////////////////////////
+public delete = (req, res, next) => {
   try {
-      const userRepository = new UserRepository();
-      userRepository.delete(req.body);
-      res.status(200).send({
-          message: 'trainee deleted successfully',
-          data: [
-              {
-                  'action': `data has deleted with id -> ${req.body.originalId}`
-              }
-          ],
-          status: 'success',
-      });
-  } catch (err) {
-      console.log('error is ', err);
+      const id = req.query.id;
+      const userData = userModel.findOne({ originalId: id })
+      userModel.findOne({ originalId: id })
+      console.log(id, "  Value of ID")
+      const remover = id;
+      console.log(remover, " remover")
+      const user = new UserRepository();
+      user.delete(id, remover)
+          .then((result) => {
+              res.send({
+                  status: 'OK',
+                  message: 'Deleted successfully', result,
+                  code: 200,
+                  data: result
+              });
+          })
   }
+  catch (err) {
+      res.send({
+          message: 'User not found to be deleted',
+          code: 404
+      });
+  };
 }
 }
 export default new TraineeController()
